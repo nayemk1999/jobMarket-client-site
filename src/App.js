@@ -9,6 +9,8 @@ import {
 import Home from './components/Home/Home/Home';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Dashboard from './components/Dashboard/Dashboard';
+import ApplyJobForm from './components/Dashboard/Employee/ApplyJobForm';
+import JobPostForm from './components/Dashboard/Employer/JobPostForm';
 export const UserContext = createContext()
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -28,6 +30,12 @@ const App = () => {
           </PrivateRoute> */}
           <Route path='/dashboard'>
             <Dashboard />
+          </Route>
+          <Route path='/applyJob'>
+            <ApplyJobForm />
+          </Route>
+          <Route path='/jobPost'>
+            <JobPostForm />
           </Route>
         </Switch>
       </Router>

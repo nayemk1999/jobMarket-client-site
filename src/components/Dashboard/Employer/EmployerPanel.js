@@ -14,11 +14,12 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import AllJobsPosted from './AllJobsPosted';
 import { mainListItems } from '../listItems';
+import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 function Copyright() {
     return (
@@ -140,6 +141,9 @@ export default function EmployerPanel() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
           </Typography>
+                    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                        <Link variant='contained' color="secondary" to='/jobPost'>Post a Job</Link>
+                    </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -159,8 +163,11 @@ export default function EmployerPanel() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+
                 <Container maxWidth="lg" className={classes.container}>
+
                     <Grid container spacing={3}>
+
                         <Grid item xs={12}>
                             <Paper className={classes.paper}>
                                 <AllJobsPosted />
