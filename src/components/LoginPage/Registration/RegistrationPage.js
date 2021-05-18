@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,21 +11,24 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import firebase from "firebase/app";
 import "firebase/auth";
-import { firebaseConfig } from '../../Firebase.config';
-import { UserContext } from '../../App';
+import { firebaseConfig } from '../../../Firebase.config';
+import { Link } from 'react-router-dom';
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
   firebase.app(); // if already initialized, use that one
 }
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -52,26 +55,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginPage() {
-  const [loggedInUser, setLoggedInUser] = useContext(UserContext)
-  const history = useHistory()
-  const location = useLocation()
-  let { from } = location.state || { from: { pathname: "/" } };
+export default function RegistrationPage() {
   const classes = useStyles();
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+
   const handleSubmit = e => {
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
+        // Signed in 
         var user = userCredential.user;
-        setLoggedInUser(user);
-        history.replace(from)
+        console.log(user);
       })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        // ..
       });
 
   };
@@ -86,6 +88,18 @@ export default function LoginPage() {
           Sign in
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Name"
+            name="name"
+            autoComplete="name"
+            autoFocus
+            onChange={e => setName(e.target.value)}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -129,8 +143,8 @@ export default function LoginPage() {
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/registration" variant="body2">
-                Don't have an account? Sign Up
+              <Link to="/login" variant="body2">
+                LogIn
               </Link>
             </Grid>
           </Grid>

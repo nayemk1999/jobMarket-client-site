@@ -12,6 +12,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ApplyJobForm from './components/Dashboard/Employee/ApplyJobForm';
 import JobPostForm from './components/Dashboard/Employer/JobPostForm';
 import LoginPage from './components/LoginPage/LoginPage';
+import RegistrationPage from './components/LoginPage/Registration/RegistrationPage';
 export const UserContext = createContext()
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -32,14 +33,17 @@ const App = () => {
           <Route path='/dashboard'>
             <Dashboard />
           </Route>
-          <Route path='/applyJob'>
+          <PrivateRoute path='/applyJob'>
             <ApplyJobForm />
-          </Route>
+          </PrivateRoute>
           <Route path='/jobPost'>
             <JobPostForm />
           </Route>
           <Route path='/login'>
             <LoginPage />
+          </Route>
+          <Route path='/registration'>
+            <RegistrationPage />
           </Route>
         </Switch>
       </Router>
