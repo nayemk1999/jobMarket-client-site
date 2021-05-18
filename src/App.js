@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Dashboard from './components/Dashboard/Dashboard';
 import ApplyJobForm from './components/Dashboard/Employee/ApplyJobForm';
 import JobPostForm from './components/Dashboard/Employer/JobPostForm';
+import LoginPage from './components/LoginPage/LoginPage';
 export const UserContext = createContext()
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -36,6 +37,9 @@ const App = () => {
           </Route>
           <Route path='/jobPost'>
             <JobPostForm />
+          </Route>
+          <Route path='/login'>
+            <LoginPage />
           </Route>
         </Switch>
       </Router>
