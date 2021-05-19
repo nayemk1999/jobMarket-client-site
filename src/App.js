@@ -9,6 +9,7 @@ import {
 import Home from './components/Home/Home/Home';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Dashboard from './components/Dashboard/Dashboard';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import ApplyJobForm from './components/Dashboard/Employee/ApplyJobForm';
 import JobPostForm from './components/Dashboard/Employer/JobPostForm';
 import LoginPage from './components/LoginPage/LoginPage';

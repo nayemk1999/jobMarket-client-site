@@ -1,9 +1,11 @@
-
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { Button, Container, CssBaseline, TextareaAutosize } from '@material-ui/core';
+import { Button, Container, CssBaseline } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import { UserContext } from '../../../App';
+import { getDefaultNormalizer } from '@testing-library/dom';
 
 export default function JobPostForm() {
     const [jobTitle, setJobTitle] = useState('');
@@ -13,6 +15,8 @@ export default function JobPostForm() {
     const [description, setDescription] = useState('');
     const [skill, setSkill] = useState('');
     const [salary, setSalary] = useState('');
+    const history = useHistory()
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext)
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -23,9 +27,22 @@ export default function JobPostForm() {
             vacancy: vacancy,
             description: description,
             skill: skill,
-            salary: salary
+            salary: salary,
+            email: loggedInUser.email || 'admin@email.com',
+            
         }
-        console.log(jobPostData);
+        fetch('http://localhost:3500/addjobpost', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(jobPostData)
+        })
+         .then(res => {
+                if (res) {
+                    alert('SuccessFully Posted Job')
+                    history.push('/dashboard')
+                }
+            })
+
     };
     return (
         <Container component="main" maxWidth="xs">
