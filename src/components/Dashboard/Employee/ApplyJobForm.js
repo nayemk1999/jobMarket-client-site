@@ -70,7 +70,7 @@ export default function ApplyJobForm() {
     data.append("file", files);
     
 
-    fetch('http://localhost:3500/applyjob', {
+    fetch('https://jobmarketportal.herokuapp.com/applyjob', {
       method: 'POST',
       body: data
     })

@@ -12,7 +12,7 @@ const AddEmployer = () => {
         const newAdmin = {
             email: data.email,
         }
-        fetch('http://localhost:3500/addEmployer', {
+        fetch('https://jobmarketportal.herokuapp.com/addEmployer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newAdmin)

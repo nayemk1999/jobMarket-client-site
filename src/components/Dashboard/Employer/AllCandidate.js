@@ -22,7 +22,7 @@ export default function AllCandidate() {
   const [loading, setLoading] = useState(false);
   const [candidates, setCandidates] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:3500/allcandidate')
+    fetch('https://jobmarketportal.herokuapp.com/allcandidate')
       .then(res => res.json())
       .then(data => {
         setLoading(true)

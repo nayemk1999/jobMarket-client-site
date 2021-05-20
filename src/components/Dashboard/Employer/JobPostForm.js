@@ -32,7 +32,7 @@ export default function JobPostForm() {
             email: loggedInUser.email || 'admin@email.com',
             
         }
-        fetch('http://localhost:3500/addjobpost', {
+        fetch('https://jobmarketportal.herokuapp.com/addjobpost', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(jobPostData)

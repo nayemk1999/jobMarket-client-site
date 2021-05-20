@@ -7,7 +7,7 @@ const Dashboard = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
     const [admin, setAdmin] = useState([])
     useEffect(() => {
-        const url = 'http://localhost:3500/employer?email=' + loggedInUser.email
+        const url = 'https://jobmarketportal.herokuapp.com/employer?email=' + loggedInUser.email
         fetch(url)
         .then(res => res.json())
         .then(data => setAdmin(data))

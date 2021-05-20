@@ -25,7 +25,7 @@ export default function EmployeeAppliedJobs() {
   const [loggedInUser, setloggedInuser] = useContext(UserContext)
     const [employee, setEmployee] = useState([])
     useEffect(() => {
-        const url = 'http://localhost:3500/appliedcandidate?email=' + loggedInUser.email;
+        const url = 'https://jobmarketportal.herokuapp.com/appliedcandidate?email=' + loggedInUser.email;
         fetch(url)
         .then(res => res.json())
         .then(data => setEmployee(data))

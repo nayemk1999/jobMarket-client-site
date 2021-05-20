@@ -35,7 +35,7 @@ export default function DisplayJobs() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3500/alljobs')
+    fetch('https://jobmarketportal.herokuapp.com/alljobs')
       .then(res => res.json())
       .then(data => setPostedJobs(data))
   }, [])
