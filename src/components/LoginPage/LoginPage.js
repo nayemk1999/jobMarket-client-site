@@ -60,6 +60,7 @@ export default function LoginPage() {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [invaild, setInvaild] = useState('');
   const handleSubmit = e => {
     e.preventDefault();
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -71,7 +72,9 @@ export default function LoginPage() {
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        if(errorMessage){
+          alert('Incorrect Email Address, Please Try again!')
+        }
       });
 
   };
@@ -83,7 +86,7 @@ export default function LoginPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Log In
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <TextField
@@ -94,7 +97,6 @@ export default function LoginPage() {
             id="email"
             label="Email Address"
             name="email"
-            autoFocus
             onChange={e => setEmail(e.target.value)}
           />
           <TextField

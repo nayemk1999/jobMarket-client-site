@@ -28,6 +28,7 @@ export default function JobPostForm() {
             description: description,
             skill: skill,
             salary: salary,
+            postDate: new Date(),
             email: loggedInUser.email || 'admin@email.com',
             
         }
@@ -122,7 +123,7 @@ export default function JobPostForm() {
                             id="salary"
                             type='number'
                             name="salary"
-                            label="CTC (Cost to Company)"
+                            label="CTC (Cost to Company) USD per Year."
                             fullWidth
                             onChange={e => setSalary(e.target.value)}
                         />

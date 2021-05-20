@@ -12,7 +12,7 @@ const AddEmployer = () => {
         const newAdmin = {
             email: data.email,
         }
-        fetch('https://noboni-internet-service.herokuapp.com/addAdmin', {
+        fetch('http://localhost:3500/addEmployer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newAdmin)
@@ -20,7 +20,7 @@ const AddEmployer = () => {
          .then(res => {
                 if (res) {
                     alert('SuccessFully Added Admin')
-                    history.push('/admin/addAdmin')
+                    history.push('/dashboard/employerdashboard')
                 }
             })
     };

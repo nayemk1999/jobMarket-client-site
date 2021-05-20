@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,11 +7,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import { useHistory, useLocation, useParams } from 'react-router';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
+import { UserContext } from '../../../App';
 
 function Copyright() {
   return (
@@ -47,22 +50,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ApplyJobForm() {
+  const { id } = useParams()
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [file, setFile] = useState('');
-
+  const [files, setFiles] = useState(null);
+  const date = new Date();
+  const history = useHistory()
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext)
   const handleSubmit = e => {
     e.preventDefault();
-    const candidateData = {
-        name: name,
-        email: email,
-        phoneNumber: number,
-        resume: file
-    }
-    console.log(candidateData);
+    const data = new FormData();
+    data.append("name", name);
+    data.append("email", loggedInUser.email);
+    data.append("applyDate", date);
+    data.append("number", number);
+    data.append("position", id);
+    data.append("file", files);
+    
+
+    fetch('http://localhost:3500/applyjob', {
+      method: 'POST',
+      body: data
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data){
+        // alert('SuccessFully Apply Job')
+        history.push('/dashboard')
+      }
+    })
+    .catch(error => {
+      console.error(error)
+    })
   };
+  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -92,6 +115,7 @@ export default function ApplyJobForm() {
             required
             fullWidth
             id="email"
+            value={loggedInUser.email}
             label="Email Address"
             name="email"
             autoComplete="email"
@@ -120,7 +144,7 @@ export default function ApplyJobForm() {
             type="file"
             id="file"
             autoComplete="current-file"
-            onChange={e => setFile(e.target.files)}
+            onChange={e => setFiles(e.target.files[0])}
           />
           <Button
             type="submit"
@@ -129,7 +153,7 @@ export default function ApplyJobForm() {
             color="primary"
             className={classes.submit}
           >
-           Apply Now
+            Apply Now
           </Button>
         </form>
       </div>

@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ApplyJobForm from './components/Dashboard/Employee/ApplyJobForm';
 import JobPostForm from './components/Dashboard/Employer/JobPostForm';
 import LoginPage from './components/LoginPage/LoginPage';
-import RegistrationPage from './components/LoginPage/Registration/RegistrationPage';
+import RegistrationPage from './components/Registration/RegistrationPage';
 export const UserContext = createContext()
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -28,18 +28,15 @@ const App = () => {
           <Route path='/home'>
             <Home></Home>
           </Route>
-          {/* <PrivateRoute path='/dashboard'>
+          <PrivateRoute path='/dashboard'>
             <Dashboard />
-          </PrivateRoute> */}
-          <Route path='/dashboard'>
-            <Dashboard />
-          </Route>
-          <PrivateRoute path='/applyJob'>
+          </PrivateRoute>
+          <PrivateRoute path='/applyjob/:id'>
             <ApplyJobForm />
           </PrivateRoute>
-          <Route path='/jobPost'>
+          <PrivateRoute path='/jobPost'>
             <JobPostForm />
-          </Route>
+          </PrivateRoute>
           <Route path='/login'>
             <LoginPage />
           </Route>

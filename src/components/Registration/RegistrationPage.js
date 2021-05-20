@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,8 +14,9 @@ import Container from '@material-ui/core/Container';
 
 import firebase from "firebase/app";
 import "firebase/auth";
-import { firebaseConfig } from '../../../Firebase.config';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation} from 'react-router-dom';
+import { firebaseConfig } from '../../Firebase.config';
+import { UserContext } from '../../App';
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
@@ -26,9 +27,6 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -60,13 +58,18 @@ export default function RegistrationPage() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext)
+  const history = useHistory()
+  const location = useLocation()
+  let { from } = location.state || { from: { pathname: "/" } };
   const handleSubmit = e => {
     e.preventDefault();
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in 
         var user = userCredential.user;
+        setLoggedInUser(user);
+        history.replace(from)
         console.log(user);
       })
       .catch((error) => {
@@ -85,7 +88,7 @@ export default function RegistrationPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <TextField
@@ -136,12 +139,7 @@ export default function RegistrationPage() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+          <Grid container> 
             <Grid item>
               <Link to="/login" variant="body2">
                 LogIn

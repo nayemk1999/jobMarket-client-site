@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../App';
 
-const EmployerDashboard = () => {
+const EmployerJobsPost = () => {
     const [Jobs, setJobs] = useState([]);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [loading, setLoading] = useState(false);
@@ -43,7 +43,7 @@ const EmployerDashboard = () => {
                         :
                         <div className="text-center m-auto">
                             {loading ?
-                                <h4 className="mt-1 text-brand">You haven't placed any orders yet. Please order and come to this page.</h4>
+                                <h4 className="mt-1 text-brand">You haven't placed any Job yet. Please Post and come to this page.</h4>
                                 :
                                 <div class="spinner-border text-brand" style={{ width: '2rem', height: '2rem', marginTop: '30%', marginLeft: '120%' }} role="status">
                                 </div>
@@ -59,4 +59,4 @@ const EmployerDashboard = () => {
     );
 };
 
-export default EmployerDashboard;
+export default EmployerJobsPost;
