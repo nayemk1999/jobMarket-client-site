@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import EmployerPanel from '../Dashboard/Employer/EmployerPanel'
 import EmployeePanel from '../Dashboard/Employee/EmployeePanel'
+import NavBar from '../NavBar/NavBar';
 
 const Dashboard = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext)
@@ -9,17 +10,18 @@ const Dashboard = () => {
     useEffect(() => {
         const url = 'https://jobmarketportal.herokuapp.com/employer?email=' + loggedInUser.email
         fetch(url)
-        .then(res => res.json())
-        .then(data => setAdmin(data))
+            .then(res => res.json())
+            .then(data => setAdmin(data))
     }, [])
     return (
         <div>
+            <NavBar></NavBar>
             {
                 admin.email ? <EmployerPanel></EmployerPanel>
-                :
-                <EmployeePanel></EmployeePanel>
+                    :
+                    <EmployeePanel></EmployeePanel>
             }
-            
+
         </div>
     );
 };

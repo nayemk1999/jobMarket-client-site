@@ -28,7 +28,12 @@ export default function AllCandidate() {
         setLoading(true)
         setCandidates(data)
       })
-  })
+  }, [])
+  const downloadResume = (file) => {
+    console.log(file);
+    alert("File Download Process don't add please check console log.")
+
+  }
   return (
     <React.Fragment>
       <h1>Recent Job Post</h1>
@@ -49,7 +54,7 @@ export default function AllCandidate() {
                 <TableCell>{candidate.position}</TableCell>
                 <TableCell>{candidate.name}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="primary">Resume Download</Button>
+                  <Button variant="contained" color="primary" onClick={() => downloadResume(candidate.file)}>Resume Download</Button>
                 </TableCell>
               </TableRow>
             ))

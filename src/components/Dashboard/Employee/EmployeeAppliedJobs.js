@@ -29,7 +29,7 @@ export default function EmployeeAppliedJobs() {
         fetch(url)
         .then(res => res.json())
         .then(data => setEmployee(data))
-    }, [])
+    }, [loggedInUser.email])
   return (
     <React.Fragment>
       <h1>Recent Your Job Applied</h1>
