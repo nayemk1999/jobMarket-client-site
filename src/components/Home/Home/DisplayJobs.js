@@ -68,7 +68,7 @@ export default function DisplayJobs() {
                       <CardContent>
                         <Typography className={classes.title} color="textSecondary" gutterBottom>
                           Codellion Job Post
-                  </Typography>
+                        </Typography>
                         <Typography variant="h5" component="h2">
                           {job.jobTitle}
                         </Typography>
@@ -77,7 +77,6 @@ export default function DisplayJobs() {
                         </Typography>
                         <Typography variant="body2" component="p">
                           {job.skill}
-
                         </Typography>
                       </CardContent>
                       <CardActions>
